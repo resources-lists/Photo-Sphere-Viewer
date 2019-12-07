@@ -43,7 +43,7 @@ export default [
     ]
   },
   {
-    input   : 'src/js/PhotoSphereViewerCompat.js',
+    input   : 'src/js/ViewerCompat.js',
     output  : {
       file   : 'dist/photo-sphere-viewer.compat.js',
       name   : 'PhotoSphereViewerCompat',

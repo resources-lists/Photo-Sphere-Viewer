@@ -1,8 +1,8 @@
-import * as PhotoSphereViewer from 'photo-sphere-viewer';
+import { DEFAULTS, Utils, Viewer } from 'photo-sphere-viewer';
 
 function snakeCaseToCamelCase(options) {
   if (typeof options === 'object') {
-    PhotoSphereViewer.Utils.each(options, (value, key) => {
+    Utils.each(options, (value, key) => {
       if (typeof key === 'string' && key.indexOf('_') !== -1) {
         const camelKey = key.replace(/(_\w)/g, matches => matches[1].toUpperCase());
         options[camelKey] = snakeCaseToCamelCase(value);
@@ -16,15 +16,15 @@ function snakeCaseToCamelCase(options) {
 /**
  * Compatibility wrapper for version 3
  */
-class PhotoSphereViewerCompat extends PhotoSphereViewer {
+export class ViewerCompat extends Viewer {
 
   constructor(options) {
     snakeCaseToCamelCase(options);
 
     if ('default_fov' in options) {
-      const minFov = options.minFov !== undefined ? options.minFov : PhotoSphereViewer.DEFAULTS.minFov;
-      const maxFov = options.maxFov !== undefined ? options.maxFov : PhotoSphereViewer.DEFAULTS.maxFov;
-      const defaultFov = PhotoSphereViewer.Utils.bound(options.default_fov, minFov, maxFov);
+      const minFov = options.minFov !== undefined ? options.minFov : DEFAULTS.minFov;
+      const maxFov = options.maxFov !== undefined ? options.maxFov : DEFAULTS.maxFov;
+      const defaultFov = Utils.bound(options.default_fov, minFov, maxFov);
       options.defaultZoomLvl = (defaultFov - minFov) / (maxFov - minFov) * 100;
     }
 
@@ -217,5 +217,3 @@ class PhotoSphereViewerCompat extends PhotoSphereViewer {
   }
 
 }
-
-export default PhotoSphereViewerCompat;

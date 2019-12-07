@@ -1,7 +1,3 @@
-/**
- * @module data/config
- */
-
 import { PSVError } from '../PSVError';
 import { bound, clone, deepmerge, isInteger, logWarn, parseAngle, parseSpeed } from '../utils';
 import { ACTIONS } from './constants';
@@ -9,11 +5,11 @@ import { SYSTEM } from './system';
 
 /**
  * @summary Default options
- * @type {PhotoSphereViewer.Options}
+ * @type {PSV.Options}
+ * @memberOf PSV
  * @constant
- * @memberOf module:data/config
  */
-const DEFAULTS = {
+export const DEFAULTS = {
   panorama           : null,
   container          : null,
   caption            : null,
@@ -100,11 +96,12 @@ const DEFAULTS = {
 
 /**
  * @summary Merge and clean user config with default config
- * @param {PhotoSphereViewer.Options} options
- * @returns {PhotoSphereViewer.Options}
- * @memberOf module:data/config
+ * @param {PSV.Options} options
+ * @returns {PSV.Options}
+ * @memberOf PSV
+ * @private
  */
-function getConfig(options) {
+export function getConfig(options) {
   const config = clone(DEFAULTS);
   deepmerge(config, options);
 
@@ -211,5 +208,3 @@ function getConfig(options) {
 
   return config;
 }
-
-export { DEFAULTS, getConfig };

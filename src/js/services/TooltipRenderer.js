@@ -1,22 +1,22 @@
 import { AbstractService } from './AbstractService';
 import { each, getStyle } from '../utils';
-import { PSVTooltip } from '../components/PSVTooltip';
+import { Tooltip } from '../components/Tooltip';
 import { EVENTS } from '../data/constants';
 
 /**
  * @summary Tooltip renderer
- * @extends module:services.AbstractService
- * @memberof module:services
+ * @extends PSV.services.AbstractService
+ * @memberof PSV.services
  */
-class PSVTooltipRenderer extends AbstractService {
+export class TooltipRenderer extends AbstractService {
 
   /**
-   * @param {PhotoSphereViewer} psv
+   * @param {PSV.Viewer} psv
    */
   constructor(psv) {
     super(psv);
 
-    const testTooltip = new PSVTooltip(this.psv);
+    const testTooltip = new Tooltip(this.psv);
 
     /**
      * @summary Computed static sizes
@@ -34,7 +34,7 @@ class PSVTooltipRenderer extends AbstractService {
 
     /**
      * @summary List of visible tooltips
-     * @member {module:components.PSVTooltip[]}
+     * @member {PSV.components.Tooltip[]}
      * @private
      */
     this.tooltips = [];
@@ -71,11 +71,11 @@ class PSVTooltipRenderer extends AbstractService {
 
   /**
    * @summary Displays a new tooltip
-   * @param {PSVTooltip.Config} config
-   * @returns {module:components.PSVTooltip}
+   * @param {Tooltip.Config} config
+   * @returns {PSV.components.Tooltip}
    */
   create(config) {
-    const tooltip = new PSVTooltip(this.psv, this.size);
+    const tooltip = new Tooltip(this.psv, this.size);
     tooltip.show(config);
 
     this.tooltips.push(tooltip);
@@ -85,7 +85,7 @@ class PSVTooltipRenderer extends AbstractService {
 
   /**
    * @summary Removes the hidden tooltip from the list
-   * @param {module:components.PSVTooltip} tooltip
+   * @param {PSV.components.Tooltip} tooltip
    * @private
    */
   __onHide(tooltip) {
@@ -96,5 +96,3 @@ class PSVTooltipRenderer extends AbstractService {
   }
 
 }
-
-export { PSVTooltipRenderer };
